@@ -1,0 +1,63 @@
+<mat-toolbar class="navbar">
+  <div class="nav-container">
+    <!-- Logo / Brand -->
+    <div class="nav-brand">
+      <span class="brand-text" routerLink="/home" routerLinkActive="active" >🎪 Event Market</span>
+    </div>
+    <span class="example-spacer"></span>
+    <!-- Desktop Navigation Links -->
+    <div class="nav-links desktop-nav">
+      <button mat-button routerLink="/home" routerLinkActive="active" (click)="closeMenu()">
+        Home
+      </button>
+      <button mat-button routerLink="/providers" routerLinkActive="active" (click)="closeMenu()">
+        Prestataires
+      </button>
+      <button mat-button routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">
+        Contact
+      </button>
+    </div>
+
+    <!-- Desktop Action Buttons -->
+    <div class="nav-actions desktop-nav">
+      <button mat-button class="login-btn" (click)="onLogin()">
+        <mat-icon>person</mat-icon>
+        <span>Login</span>
+      </button>
+      <button mat-raised-button class="register-btn" color="primary" (click)="onRegister()">
+        Get Started
+      </button>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button mat-icon-button class="menu-btn mobile-nav" (click)="toggleMenu()">
+      <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" [class.open]="isMenuOpen">
+    <div class="mobile-menu-content">
+      <button mat-button routerLink="/home" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+      <button mat-button routerLink="/providers" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>business</mat-icon>
+        Prestataires
+      </button>
+      <button mat-button routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>contact_mail</mat-icon>
+        Contact
+      </button>
+      <hr class="menu-divider" />
+      <button mat-button class="mobile-login" (click)="onLogin(); closeMenu()">
+        <mat-icon>person</mat-icon>
+        Login
+      </button>
+      <button mat-raised-button class="mobile-register" color="primary" (click)="onRegister(); closeMenu()">
+        Get Started
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

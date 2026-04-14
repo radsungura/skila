@@ -1,0 +1,66 @@
+<!-- providers-list.component.html -->
+<div class="providers-container">
+  <!-- Header -->
+  <header class="providers-header">
+    <h1>Event Market</h1>
+    <p class="subtitle">Trouvez le prestataire parfait pour votre événement</p>
+  </header>
+
+  <!-- Barre de recherche & filtres -->
+  <div class="search-filters">
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher un prestataire..." class="search-input" />
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="filter-buttons">
+      <button class="filter-btn active">Tous</button>
+      <button class="filter-btn">Music Band</button>
+      <button class="filter-btn">Décoration</button>
+      <button class="filter-btn">Traiteur</button>
+    </div>
+  </div>
+
+  <!-- Liste des prestataires -->
+  <div class="providers-grid">
+    @for (place of places(); track place.id) {
+      <div class="provider-card">
+        <!-- Badge catégorie -->
+        <div class="category-badge">
+          {{ place.category }}
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="card-content">
+          <h2 class="provider-name">{{ place.name }}</h2>
+          <p class="provider-location">📍 {{ place.location }}</p>
+          <p class="provider-description">{{ place.description }}</p>
+
+          <!-- Note & avis -->
+          <div class="rating">
+            <span class="stars">⭐</span>
+            <span class="rating-value"><strong>{{ place.rating }}</strong></span>
+            <span class="rating-label">Excellent</span>
+            <span class="reviews">· {{ place.reviews }} avis</span>
+          </div>
+
+          <!-- Prix -->
+          <div class="price">
+            À partir de <strong>{{ place.price }} FBU</strong>
+          </div>
+
+          <!-- Bouton -->
+          <button class="details-btn" (click)="viewDetails(place.id)">
+            Voir les détails →
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Message si aucun résultat -->
+   @if(places.length === 0) {
+     <div class="no-results">
+       <p>Aucun lieu trouvé.</p>
+     </div>
+   }
+</div>

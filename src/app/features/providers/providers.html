@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<div class="providers-container">
+  <!-- BARRE DE RECHERCHE & FILTRES -->
+  <div class="search-section">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        providerholder="Rechercher un prestataire (nom, description, lieu...)"
+        class="search-input"
+        [value]="searchTerm()"
+        (input)="onSearchChange($event)"
+      />
+      @if (searchTerm()) {
+        <button class="clear-btn" (click)="resetFilters()">✕</button>
+      }
+    </div>
+
+    <div class="filter-row">
+      <div class="filter-buttons">
+        @for (cat of categories(); track cat) {
+          <button
+            class="filter-chip"
+            [class.active]="selectedCategory() === cat"
+            (click)="filterByCategory(cat)">
+            {{ cat }}
+          </button>
+        }
+      </div>
+      <div class="results-badge">
+        {{ resultsCount() }} prestataire(s)
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTE DES PRESTATAIRES -->
+  @if (filteredProviders().length > 0) {
+    <div class="providers-list new">
+      @for (provider of filteredProviders(); track provider.id) {
+        <div class="provider-card">
+          <!-- Badge catégorie -->
+          <div class="category-badge" [attr.data-category]="provider.category">
+            {{ provider.category }}
+          </div>
+          <div class="favorite">❤</div>
+
+          <!-- Contenu de la carte -->
+          <div class="card-content">
+            <h2 class="provider-name">{{ provider.name }}</h2>
+            
+            <button mat-button color="primary"  class="location">
+              <span class="location-icon ">📍</span>
+              <span>{{ provider.location }}</span>
+            </button>
+
+            <p class="description">{{ provider.description }}</p>
+
+            <!-- Évaluation -->
+            <div class="rating-section">
+              <div class="stars">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <span class="star" [class.filled]="star <= (provider.rating / 2)">
+                    ★
+                  </span>
+                }
+              </div>
+              <span class="rating-value">{{ provider.rating }}</span>
+              <span class="rating-label">/10</span>
+              <span class="reviews">({{ provider.reviews }} avis)</span>
+            </div>
+
+            <!-- Prix -->
+            <div class="price">
+              <span class="price-label">À partir de </span>
+              <span class="price-value"> <strong>{{ formatPrice(provider.price) }} FBU</strong></span>
+            </div>
+
+            <!-- Bouton action -->
+            <button class="btn-details" (click)="viewDetails(provider.id)">
+              Voir les détails
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <!-- État vide -->
+    <div class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <h3>Aucun prestataire trouvé</h3>
+      <p>Aucun résultat ne correspond à "{{ searchTerm() }}" dans la catégorie "{{ selectedCategory() }}"</p>
+      <button class="reset-btn" (click)="resetFilters()">Réinitialiser les filtres</button>
+    </div>
+  }
+</div>

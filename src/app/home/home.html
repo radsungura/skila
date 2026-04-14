@@ -1,0 +1,213 @@
+<app-navbar></app-navbar>
+<div class="home-container">
+  
+  <!-- ========== SECTION HERO ========== -->
+  <section class="hero">
+    <div class="hero-content">
+      <!-- <div class="hero-badge">
+        <span class="badge-icon">⭐</span>
+        La référence au Burundi
+      </div> -->
+      <h1 class="hero-title">
+        Trouvez le prestataire<br>
+        <span class="gradient-text">parfait pour vos événements au <span style="color: #f20651;">Burundi</span></span>
+      </h1>
+      <p class="hero-description">
+        Découvrez des centaines de prestataires de qualité pour vos mariages, anniversaires, 
+        conférences et tous vos événements. Comparez, réservez et vivez une expérience unique.
+      </p>
+      <div class="hero-buttons">
+        <a routerLink="/providers" class="btn-primary">
+          Explorer les prestataires
+          <span class="arrow">→</span>
+        </a>
+        <a routerLink="/how-it-works" class="btn-secondary">
+          Comment ça marche ?
+        </a>
+      </div>
+      <div class="hero-stats">
+        @for (stat of stats(); track stat.label) {
+          <div class="stat-item">
+            <span class="stat-value">{{ stat.value }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-image-placeholder">
+        <div class="floating-card card-1">🎵 Music Band</div>
+        <div class="floating-card card-2">🎨 Décoration</div>
+        <div class="floating-card card-3">🍽️ Traiteur</div>
+        <div class="hero-icon">🎪</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION CATÉGORIES ========== -->
+  <section class="categories">
+    <div class="section-header">
+      <span class="section-badge">Catégories</span>
+      <h2 class="section-title">Trouvez par catégorie</h2>
+      <p class="section-subtitle">Plus de 10 catégories de prestataires pour tous vos besoins</p>
+    </div>
+    <div class="categories-grid">
+      @for (cat of categories(); track cat.id) {
+        <div class="category-card" [style.background]="cat.bg" (click)="navigateToCategory(cat.name)">
+          <div class="category-icon" [style.color]="cat.color">{{ cat.icon }}</div>
+          <h3 class="category-name">{{ cat.name }}</h3>
+          <p class="category-description">{{ cat.description }}</p>
+          <span class="category-link" [style.color]="cat.color">Découvrir →</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ========== SECTION PRESTATAIRES EN VEDETTE ========== -->
+  <section class="featured">
+    <div class="section-header">
+      <span class="section-badge">Top prestataires</span>
+      <h2 class="section-title">Prestataires en vedette</h2>
+      <p class="section-subtitle">Les meilleurs prestataires sélectionnés pour vous</p>
+    </div>
+    <div class="featured-grid">
+      @for (provider of featuredProviders(); track provider.id) {
+        <div class="featured-card" (click)="viewProviderDetails(provider.id)">
+          <div class="card-icon">{{ provider.image }}</div>
+          <h3 class="provider-name">{{ provider.name }}</h3>
+          <span class="provider-category">{{ provider.category }}</span>
+          <div class="provider-location">📍 {{ provider.location }}</div>
+          <div class="provider-rating">
+            <span class="stars">⭐</span>
+            <span class="rating">{{ provider.rating }}</span>
+            <span class="rating-max">/10</span>
+          </div>
+          <div class="provider-price">
+            À partir de <strong>{{ provider.price }} FBU</strong>
+          </div>
+          <button class="card-btn">Voir les détails →</button>
+        </div>
+      }
+    </div>
+    <div class="view-all">
+      <a routerLink="/providers" class="view-all-link">
+        Voir tous les prestataires
+        <span>→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== SECTION COMMENT ÇA MARCHE ========== -->
+  <section class="how-it-works">
+    <div class="section-header">
+      <span class="section-badge">Processus simple</span>
+      <h2 class="section-title">Comment ça marche ?</h2>
+      <p class="section-subtitle">4 étapes simples pour organiser votre événement</p>
+    </div>
+    <div class="steps-container">
+      @for (step of steps(); track step.step) {
+        <div class="step-item">
+          <div class="step-number">{{ step.step }}</div>
+          <div class="step-icon">{{ step.icon }}</div>
+          <h3 class="step-title">{{ step.title }}</h3>
+          <p class="step-description">{{ step.description }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ========== SECTION TÉMOIGNAGES ========== -->
+  <section class="testimonials">
+    <div class="section-header">
+      <span class="section-badge">Témoignages</span>
+      <h2 class="section-title">Ce que nos clients disent</h2>
+      <p class="section-subtitle">Ils nous font confiance pour leurs événements</p>
+    </div>
+    <div class="testimonials-grid">
+      @for (testimonial of testimonials(); track testimonial.id) {
+        <div class="testimonial-card">
+          <div class="testimonial-avatar">{{ testimonial.avatar }}</div>
+          <div class="testimonial-content">
+            <p class="testimonial-text">"{{ testimonial.content }}"</p>
+            <div class="testimonial-rating">
+              @for (star of [1,2,3,4,5]; track star) {
+                <span class="star" [class.filled]="star <= testimonial.rating">★</span>
+              }
+            </div>
+            <h4 class="testimonial-name">{{ testimonial.name }}</h4>
+            <p class="testimonial-role">{{ testimonial.role }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ========== SECTION CTA ========== -->
+  <section class="cta">
+    <div class="cta-content">
+      <h2 class="cta-title">Prêt à organiser votre événement ?</h2>
+      <p class="cta-description">
+        Rejoignez des milliers de clients satisfaits et trouvez le prestataire idéal dès aujourd'hui.
+      </p>
+      <div class="cta-buttons">
+        <a routerLink="/providers" class="cta-btn-primary">
+          Commencer maintenant
+          <span>→</span>
+        </a>
+        <a routerLink="/contact" class="cta-btn-secondary">
+          Contacter l'équipe
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>🎪 Event Market</h3>
+        <p>La première marketplace d'événements au Burundi. Trouvez les meilleurs prestataires pour vos occasions spéciales.</p>
+        <div class="social-links">
+          <a href="#">📘</a>
+          <a href="#">📷</a>
+          <a href="#">🐦</a>
+          <a href="#">💼</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="link-group">
+          <h4>Explorer</h4>
+          <a routerLink="/providers">Prestataires</a>
+          <a routerLink="/categories">Catégories</a>
+          <a routerLink="/events">Événements</a>
+          <a routerLink="/offers">Offres</a>
+        </div>
+        <div class="link-group">
+          <h4>À propos</h4>
+          <a routerLink="/about">Qui sommes-nous ?</a>
+          <a routerLink="/contact">Contact</a>
+          <a routerLink="/blog">Blog</a>
+          <a routerLink="/press">Presse</a>
+        </div>
+        <div class="link-group">
+          <h4>Légal</h4>
+          <a routerLink="/terms">Conditions générales</a>
+          <a routerLink="/privacy">Confidentialité</a>
+          <a routerLink="/cookies">Cookies</a>
+          <a routerLink="/faq">FAQ</a>
+        </div>
+        <div class="link-group">
+          <h4>Newsletter</h4>
+          <p>Recevez nos offres exclusives</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Votre email" />
+            <button>S'abonner</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Event Market - Tous droits réservés</p>
+    </div>
+  </footer>
+</div>

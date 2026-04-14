@@ -1,0 +1,269 @@
+// providers-list.component.scss
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.providers-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Header */
+.providers-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    color: #64748b;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Search & Filters */
+.search-filters {
+  margin-bottom: 2rem;
+
+  .search-bar {
+    position: relative;
+    margin-bottom: 1.25rem;
+
+    .search-input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 3rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 48px;
+      font-size: 1rem;
+      background: white;
+      transition: all 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #94a3b8;
+    }
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+      background: white;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #f1f5f9;
+      }
+
+      &.active {
+        background: #3b82f6;
+        color: white;
+        border-color: #3b82f6;
+      }
+    }
+  }
+}
+
+/* Providers Grid - Responsive */
+.providers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.75rem;
+}
+
+/* Provider Card */
+.provider-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.category-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: #f1f5f9;
+  color: #334155;
+
+  &.music-band {
+    background: #e0f2fe;
+    color: #0284c7;
+  }
+
+  &.decoration {
+    background: #fae8ff;
+    color: #a21caf;
+  }
+}
+
+.card-content {
+  padding: 1.5rem;
+
+  .provider-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.25rem;
+    padding-right: 80px;
+  }
+
+  .provider-location {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+  }
+
+  .provider-description {
+    font-size: 0.875rem;
+    color: #475569;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+
+    .stars {
+      font-size: 0.9rem;
+    }
+
+    .rating-value {
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .rating-label {
+      font-size: 0.85rem;
+      color: #15803d;
+      font-weight: 500;
+    }
+
+    .reviews {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+  }
+
+  .price {
+    font-size: 1rem;
+    color: #0f172a;
+    margin-bottom: 1.25rem;
+
+    strong {
+      font-size: 1.25rem;
+      color: #3b82f6;
+    }
+  }
+
+  .details-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #1e293b;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+
+    &:hover {
+      background: #3b82f6;
+      color: white;
+    }
+  }
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .providers-container {
+    padding: 1rem;
+  }
+
+  .providers-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .providers-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .filter-buttons {
+    justify-content: center;
+  }
+
+  .card-content {
+    padding: 1rem;
+
+    .provider-name {
+      font-size: 1.2rem;
+      padding-right: 70px;
+    }
+  }
+}
+
+/* Responsive - Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .providers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
