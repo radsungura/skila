@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://skillapi.onrender.com/'
+    apiUrl: 'https://skila-api.onrender.com/'
 };
