@@ -199,7 +199,7 @@ $radius-sm: 12px;
 
       .hero-icon {
         font-size: 8rem;
-        opacity: 0.3;
+        // opacity: 0.3;
       }
 
       .floating-card {
@@ -218,7 +218,7 @@ $radius-sm: 12px;
         }
         &.card-2 {
           bottom: 20%;
-          right: -10%;
+          right: -5%;
           color: $secondary;
         }
         &.card-3 {

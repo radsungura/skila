@@ -13,10 +13,18 @@ $radius-lg: 20px;
 $radius-md: 16px;
 $radius-sm: 8px;
 
-.loading-spinner {
+.loading-spinner{
   text-align: center;
   font-size: 18px;
   color: #666;
+
+  img{
+    top: 25rem;
+    position: fixed;
+    margin: -80px;
+    width: 10%;
+    z-index: 1000;
+  }
 }
 
 .list{
@@ -155,15 +163,17 @@ p {
 }
 
 .btn-details{
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 15%;
-  float: right;
-  margin: -20px 0px 20px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    right: 10px;
+    position: absolute;
+    bottom: 10px;
+    margin: 10px;
 }
 
 /* ========== ÉTAT VIDE ========== */
@@ -278,11 +288,17 @@ p {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  display: flex;
 
   &:hover {
     transform: translateX(4px);
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     border-color: #60a5fa;
+  }
+  img{
+    width: 35%;
+    min-width: 35%;
+    max-width: 35%;
   }
 }
 
@@ -702,73 +718,6 @@ $radius-full: 9999px;
   font-weight: 500;
 }
 
-/* ========== LISTE DES PRESTATAIRES (VERSION LISTE) ========== */
-
-.providers-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.provider-card {
-  background: $white;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
-  border: 1px solid $border-light;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-
-  &:hover {
-    transform: translateX(4px);
-    box-shadow: $shadow-md;
-    border-color: $primary-light;
-  }
-}
-
-.category-badge {
-  position: absolute;
-  top: 1rem;
-  right: 4rem;
-  padding: 0.3rem 0.9rem;
-  border-radius: $radius-full;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 1;
-
-  &[data-category="Music Band"] {
-    background: linear-gradient(135deg, #dbeafe, #eff6ff);
-    color: #1d4ed8;
-  }
-
-  &[data-category="Decoration"] {
-    background: linear-gradient(135deg, #fae8ff, #fdf4ff);
-    color: #a21caf;
-  }
-
-  &[data-category="Traiteur"] {
-    background: linear-gradient(135deg, #fed7aa, #fffbeb);
-    color: #9a3412;
-  }
-
-  &[data-category="Photographie"] {
-    background: linear-gradient(135deg, #ccfbf1, #f0fdf4);
-    color: #0f766e;
-  }
-
-  &[data-category="Animation"] {
-    background: linear-gradient(135deg, #fee2e2, #fef2f2);
-    color: #dc2626;
-  }
-
-  &[data-category="Son & Lumière"] {
-    background: linear-gradient(135deg, #cffafe, #ecfeff);
-    color: #0891b2;
-  }
-}
-
 /* ========== RESPONSIVE =======
 
 /* Mobile */
@@ -845,6 +794,52 @@ $radius-full: 9999px;
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+// skeleton loader
+
+.image-skeleton {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 35%;
+  max-width: 35%;
+  min-width: 35%;
+  // height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c9d4de;
+  
+  .placeholder-icon {
+    font-size: 3rem;
+    color: #94a3b8;
+    z-index: 1;
+  }
+  
+  .skeleton-shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255, 255, 255),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 

@@ -26,21 +26,17 @@ export interface Provider {
 })
 
 export class ProvidersComponent {
-  // providers: any; // Liste des prestataires
+  providers: any = []; // Liste des prestataires
   isLoading: boolean = true; // Indicateur de chargement
 
-  // constructor(private prov: ProvidersService) { 
-  //   this.providers = this.prov.getAll().subscribe(el => {
-  //     console.log("data", el);
-  //         if (el) {
-  //           this.providers = el;
-  //           this.isLoading = false;
-  //         } else {
-  //           this.providers = [];
-  //         }
-  //   });  
-  // }
-
+  constructor(private prov: ProvidersService) { 
+    this.isLoading = true; // Activer le chargement
+    this.prov.getAll().subscribe(el => {
+      if (el.length) {
+        this.allProviders.set(el); // Mettre à jour la liste complète des prestataires
+      }
+    });  
+  }
   // Terme de recherche
   searchTerm = signal<string>('');
   
@@ -48,130 +44,63 @@ export class ProvidersComponent {
   selectedCategory = signal<string>('Tous');
   
   // Liste des catégories disponibles
-  categories = signal<string[]>(['Tous', 'Music Band', 'Decoration', 'Traiteur', 'Photographie']);
+  categories = signal<string[]>(['Tous', 'Music Band', 'Decoration', 'Traiteur', 'Photographie', 'Animation']);
   
   // Liste complète des prestataires
-  private allProviders = signal<Provider[]>([
-    {
-      id: 1,
-      name: 'la rose',
-      category: 'Music Band',
-      location: 'Ngagara',
-      description: 'On rend vos événements inoubliable en vous offrant un service de Karaoké unique avec des chanteurs et musiciens expérimentés',
-      rating: 8.6,
-      reviews: 120,
-      price: 50000
-    },
-    {
-      id: 2,
-      name: 'Muhira',
-      category: 'Music Band',
-      location: 'Ngagara',
-      description: 'Avec nous vos événements ne sont plus comme les autres, ils sont uniques',
-      rating: 7.1,
-      reviews: 150,
-      price: 50000
-    },
-    {
-      id: 3,
-      name: 'El Magnifico',
-      category: 'Decoration',
-      location: 'Ngagara',
-      description: 'On décore pas vos Providers d\'événements mais on les transforme en vos rêves',
-      rating: 8.2,
-      reviews: 200,
-      price: 50000
-    },
-    {
-      id: 4,
-      name: 'Golden Sound',
-      category: 'Music Band',
-      location: 'Kinindo',
-      description: 'Sonorisation professionnelle et ambiance musicale de qualité pour tous vos événements',
-      rating: 9.1,
-      reviews: 85,
-      price: 75000
-    },
-    {
-      id: 5,
-      name: 'Fleuriste Eden',
-      category: 'Decoration',
-      location: 'Rohero',
-      description: 'Compositions florales élégantes et originales pour mariages et réceptions',
-      rating: 8.8,
-      reviews: 95,
-      price: 35000
-    }
-  ]);
+    // private allProviders = signal<Provider[]>([
+    //   {
+    //     id: 1,
+    //     name: 'la rose',
+    //     category: 'Music Band',
+    //     location: 'Ngagara',
+    //     description: 'On rend vos événements inoubliable en vous offrant un service de Karaoké unique avec des chanteurs et musiciens expérimentés',
+    //     rating: 8.6,
+    //     reviews: 120,
+    //     price: 50000
+    //   },
+    //   {
+    //     id: 2,
+    //     name: 'Muhira',
+    //     category: 'Music Band',
+    //     location: 'Ngagara',
+    //     description: 'Avec nous vos événements ne sont plus comme les autres, ils sont uniques',
+    //     rating: 7.1,
+    //     reviews: 150,
+    //     price: 50000
+    //   },
+    //   {
+    //     id: 3,
+    //     name: 'El Magnifico',
+    //     category: 'Decoration',
+    //     location: 'Ngagara',
+    //     description: 'On décore pas vos Providers d\'événements mais on les transforme en vos rêves',
+    //     rating: 8.2,
+    //     reviews: 200,
+    //     price: 50000
+    //   },
+    //   {
+    //     id: 4,
+    //     name: 'Golden Sound',
+    //     category: 'Music Band',
+    //     location: 'Kinindo',
+    //     description: 'Sonorisation professionnelle et ambiance musicale de qualité pour tous vos événements',
+    //     rating: 9.1,
+    //     reviews: 85,
+    //     price: 75000
+    //   },
+    //   {
+    //     id: 5,
+    //     name: 'Fleuriste Eden',
+    //     category: 'Decoration',
+    //     location: 'Rohero',
+    //     description: 'Compositions florales élégantes et originales pour mariages et réceptions',
+    //     rating: 8.8,
+    //     reviews: 95,
+    //     price: 35000
+    //   }
+    // ]);
+    private allProviders = signal<any[]>([]); // Liste complète des prestataires
 
-  // ===========test data===========
-  providers = [
-    {
-      id: 1,
-      name: 'la rose',
-      category: 'Music Band',
-      location: 'Ngagara',
-      desc: 'On rend vos événements inoubliable en vous offrant un service de Karaoké unique avec des chanteurs et musiciens expérimentés',
-      services: 'efdffd',
-      image: '../../../assets/images/band1.jpeg',
-      address: 'Ngagara, Bujumbura',
-      rating: 8.6,
-      reviews: 120,
-      price: 50000
-    },
-    {
-      id: 2,
-      name: 'Muhira',
-      category: 'Music Band',
-      location: 'Ngagara',
-      desc: 'Avec nous vos événements ne sont plus comme les autres, ils sont uniques',
-      services: 'efdffd',
-      address: 'Ngagara, Bujumbura',
-      image: 'sdsdsfdf',
-      rating: 7.1,
-      reviews: 150,
-      price: 50000
-    },
-    {
-      id: 3,
-      name: 'El Magnifico',
-      category: 'Decoration',
-      location: 'Ngagara',
-      desc: 'On décore pas vos Providers d\'événements mais on les transforme en vos rêves',
-      services: 'efdffd',
-      address: 'Ngagara, Bujumbura',
-      image: 'sdsdsfdf',
-      rating: 8.2,
-      reviews: 200,
-      price: 50000
-    },
-    {
-      id: 4,
-      name: 'Golden Sound',
-      category: 'Music Band',
-      location: 'Kinindo',
-      desc: 'Sonorisation professionnelle et ambiance musicale de qualité pour tous vos événements',
-      services: 'efdffd',
-      address: 'Ngagara, Bujumbura',
-      image: 'sdsdsfdf',
-      rating: 9.1,
-      reviews: 85,
-      price: 75000
-    },
-    {
-      id: 5,
-      name: 'Fleuriste Eden',
-      category: 'Decoration',
-      location: 'Rohero',
-      desc: 'Compositions florales élégantes et originales pour mariages et réceptions',
-      image: 'sdsdsfdf',
-      rating: 8.8,
-      address: 'Ngagara, Bujumbura',
-      services: 'efdffd',
-      reviews: 95,
-      price: 35000
-    }
-  ];
 
   // ========== COMPUTED SIGNALS (filtres) ==========
   
@@ -183,18 +112,22 @@ export class ProvidersComponent {
 
     // Filtre par catégorie
     if (category !== 'Tous') {
-      result = result.filter(Provider => Provider.category === category);
+      result = result.filter(Provider => Provider.services === category);
     }
 
     // Filtre par recherche (nom ou description)
     if (search) {
       result = result.filter(Provider =>
         Provider.name.toLowerCase().includes(search) ||
-        Provider.description.toLowerCase().includes(search) ||
+        Provider.desc.toLowerCase().includes(search) ||
         Provider.location.toLowerCase().includes(search)
       );
     }
-
+    console.log("data", result);
+    if (result.length === 0) {
+      this.isLoading = false; // Désactiver le chargement si aucun résultat trouvé
+    }
+    
     return result;
   });
 
