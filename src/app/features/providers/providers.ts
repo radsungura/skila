@@ -47,60 +47,7 @@ export class ProvidersComponent {
   categories = signal<string[]>(['Tous', 'Music Band', 'Decoration', 'Traiteur', 'Photographie', 'Animation']);
   
   // Liste complète des prestataires
-    // private allProviders = signal<Provider[]>([
-    //   {
-    //     id: 1,
-    //     name: 'la rose',
-    //     category: 'Music Band',
-    //     location: 'Ngagara',
-    //     description: 'On rend vos événements inoubliable en vous offrant un service de Karaoké unique avec des chanteurs et musiciens expérimentés',
-    //     rating: 8.6,
-    //     reviews: 120,
-    //     price: 50000
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Muhira',
-    //     category: 'Music Band',
-    //     location: 'Ngagara',
-    //     description: 'Avec nous vos événements ne sont plus comme les autres, ils sont uniques',
-    //     rating: 7.1,
-    //     reviews: 150,
-    //     price: 50000
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'El Magnifico',
-    //     category: 'Decoration',
-    //     location: 'Ngagara',
-    //     description: 'On décore pas vos Providers d\'événements mais on les transforme en vos rêves',
-    //     rating: 8.2,
-    //     reviews: 200,
-    //     price: 50000
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Golden Sound',
-    //     category: 'Music Band',
-    //     location: 'Kinindo',
-    //     description: 'Sonorisation professionnelle et ambiance musicale de qualité pour tous vos événements',
-    //     rating: 9.1,
-    //     reviews: 85,
-    //     price: 75000
-    //   },
-    //   {
-    //     id: 5,
-    //     name: 'Fleuriste Eden',
-    //     category: 'Decoration',
-    //     location: 'Rohero',
-    //     description: 'Compositions florales élégantes et originales pour mariages et réceptions',
-    //     rating: 8.8,
-    //     reviews: 95,
-    //     price: 35000
-    //   }
-    // ]);
     private allProviders = signal<any[]>([]); // Liste complète des prestataires
-
 
   // ========== COMPUTED SIGNALS (filtres) ==========
   
@@ -117,13 +64,18 @@ export class ProvidersComponent {
 
     // Filtre par recherche (nom ou description)
     if (search) {
+      console.log("search", search);
+      
       result = result.filter(Provider =>
+        
         Provider.name.toLowerCase().includes(search) ||
         Provider.desc.toLowerCase().includes(search) ||
-        Provider.location.toLowerCase().includes(search)
+        Provider.address.toLowerCase().includes(search),
       );
-    }
     console.log("data", result);
+
+    }
+
     if (result.length === 0) {
       this.isLoading = false; // Désactiver le chargement si aucun résultat trouvé
     }
