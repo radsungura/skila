@@ -1,3 +1,112 @@
 table {
   width: 100%;
 }
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.providers-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    background: white;
+    min-height: 100vh;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+// search bar
+.search-section {
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: grey;
+  border: 1px solid aliceblue;
+  position: sticky;
+  top: 1rem;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.search-bar {
+    position: relative;
+    margin-bottom: 1.25rem;
+    justify-content: center;
+    display: flex;
+    width: 50%;
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #94a3b8;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.9rem 3rem 0.9rem 3rem;
+    border: 1px solid blue;
+    border-radius: 50px;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: blue;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  .clear-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: grey;
+    border: none;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #94a3b8;
+      color: white;
+    }
+  }
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    align-items: baseline;
+}
+
+.add-btn{
+    background: #477df6;
+    color: aliceblue!important;
+}

@@ -38,13 +38,14 @@
     <div class="providers-list new">
       @for (provider of filteredProviders(); track provider.id) {
         <div class="provider-card">
-          @if (!provider.image && isLoading) {
+          @if (imgLoading) {
             <div class="image-skeleton">
               <div class="skeleton-shimmer"></div>
-              <!-- <div class="placeholder-icon">📷</div> -->
+              <div class="placeholder-icon">📷</div>
             </div>
+            <img hidden [src]="'images/' + provider.image" (load)="onLoad()" (error)="onError()" alt="service">
           }@else { 
-            <img [src]="'images/' + provider.image" alt="service">
+            <img [src]="'images/' + provider.image" (load)="onLoad()" (error)="onError()" alt="service">
           }
           <!-- Badge catégorie -->
           <div class="category-badge" [attr.data-category]="provider.services">
@@ -92,7 +93,12 @@
         </div>
       }
     </div>
-  } @else if(isLoading === false) {
+  }  @if(isLoading){
+    <div class="loading-spinner">
+        <img src="http://localhost:4200/load1.gif" alt="loading">
+    </div>
+  } 
+  @else if(filteredProviders().length === 0) {
     <!-- État vide -->
     <div class="empty-state">
       <div class="empty-icon">🔍</div>
@@ -100,11 +106,5 @@
       <p>Aucun résultat ne correspond à "{{ searchTerm() }}" dans la catégorie "{{ selectedCategory() }}"</p>
       <button class="reset-btn" (click)="resetFilters()">Réinitialiser les filtres</button>
     </div>
-  }
-
-  @if (isLoading){
-    <div class="loading-spinner">
-        <img src="http://localhost:4200/load1.gif" alt="loading">
-    </div>
-  }
+  } 
 </div>

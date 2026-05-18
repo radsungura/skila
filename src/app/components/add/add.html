@@ -1,1 +1,59 @@
-<p>add works!</p>
+<div class="container" >
+    <h2 mat-dialog-title>
+        Ajouter un Document
+    </h2>
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nom</mat-label>
+        <input [(ngModel)]="data.name" matInput formControlName="title" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Services</mat-label>
+        <input [(ngModel)]="data.services" matInput formControlName="reference" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Price</mat-label>
+        <input [(ngModel)]="data.price" matInput formControlName="category" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Start</mat-label>
+        <input [(ngModel)]="data.start" matInput formControlName="location" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Adresse</mat-label>
+        <input [(ngModel)]="data.address" matInput formControlName="status" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Tel</mat-label>
+        <input [(ngModel)]="data.tel" matInput formControlName="status" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email</mat-label>
+        <input [(ngModel)]="data.email" matInput formControlName="status" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Ville</mat-label>
+        <input [(ngModel)]="data.city" matInput formControlName="status" required/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Statut</mat-label>
+        <input [(ngModel)]="data.status" matInput formControlName="status" required/>
+      </mat-form-field>
+
+      <div class="flex justify-end mt-4" align="end">
+        <button mat-button (click)="dialogRef.close()">Annuler</button>
+        <button mat-raised-button color="btn-primary" (click)="add(data)"> Ajouter </button>
+      </div>
+    </form>
+    @if(servererror) {
+      <p style="color: red;">Une erreur est survenu !</p>
+    }
+</div>
