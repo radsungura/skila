@@ -426,9 +426,13 @@ p {
     background: linear-gradient(135deg, #dbeafe, #eff6ff);
     color: #1d4ed8;
   }
+  &[data-category="Salle de reception"] {
+    background: linear-gradient(135deg, #a7ff98, #ffaaf4);
+    color: #035e9f;
+  }
 
   &[data-category="Decoration"] {
-    background: linear-gradient(135deg, #fae8ff, #fdf4ff);
+    background: linear-gradient(135deg, #e49df7, #bdc7ff);
     color: #a21caf;
   }
 

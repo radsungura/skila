@@ -9,7 +9,7 @@ export class ProvidersService {
   allprov: any;
   prov: any;
   providers: any = {};
-     private api = 'https://skila-api.onrender.com/providers';
+     private api = 'http://localhost:3000/providers';
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any[]> {
