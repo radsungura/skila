@@ -36,5 +36,16 @@ export interface User {
     name: string;
     fullname: string;
     email: string;
+    role: 'admin' | 'provider' | 'client';
     pass: string;
+    phone: string
 }
+
+// interface User {
+//   id: number;
+//   email: string;
+//   name: string;
+//   role: 'admin' | 'provider' | 'client';
+//   avatar?: string;
+//   phone?: string;
+// }

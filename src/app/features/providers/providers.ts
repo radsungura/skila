@@ -29,6 +29,8 @@ export class ProvidersComponent {
   providers: any = []; // Liste des prestataires
   isLoading: boolean = true; // Indicateur de chargement
   imgLoading: boolean = true; // Indicateur de chargement
+  imgerror: boolean = false; // Indicateur d'erreur de chargement d'image
+  imgeror: string = ''; // Stocke le nom de l'image qui a échoué à charger"";
 
   constructor(private prov: ProvidersService) { 
     this.isLoading = true; // Activer le chargement
@@ -47,8 +49,11 @@ export class ProvidersComponent {
     this.imgLoading = false; // Désactiver le chargement de l'image
   }
 
-  onError() {
+  onError(item: string) {
+    this.imgerror = true; // Activer l'indicateur d'erreur
+    this.imgeror = item;// Activer l'indicateur d'erreur
     console.log('Erreur de chargement');
+    return item; // Empêcher l'affichage de l'image cassée
   }
 
   // Terme de recherche
