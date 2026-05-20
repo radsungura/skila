@@ -427,13 +427,13 @@ p {
     color: #1d4ed8;
   }
   &[data-category="Salle de reception"] {
-    background: linear-gradient(135deg, #a7ff98, #ffaaf4);
+    background: linear-gradient(135deg, #cdffc4, #ffdffb);
     color: #035e9f;
   }
 
   &[data-category="Decoration"] {
-    background: linear-gradient(135deg, #e49df7, #bdc7ff);
-    color: #a21caf;
+    background: linear-gradient(135deg, #f6e1fc, #d7ddff);
+    color: #76147f;
   }
 
   &[data-category="Traiteur"] {
@@ -442,7 +442,7 @@ p {
   }
 
   &[data-category="Photographie"] {
-    background: linear-gradient(135deg, #ccfbf1, #f0fdf4);
+    background: linear-gradient(135deg, #d6faf2, #f0fdf4);
     color: #0f766e;
   }
 
