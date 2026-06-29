@@ -50,7 +50,7 @@
           <div class="category-badge" [attr.data-category]="provider.services">
             {{ provider.services }}
           </div>
-          <div class="favorite">❤</div>
+          <!-- <div class="favorite">❤</div> -->
 
           <!-- Contenu de la carte -->
           <div class="card-content">
@@ -58,7 +58,8 @@
             
             <button mat-button color="primary"  class="location">
               <span class="location-icon ">📍</span>
-              <span>{{ provider.city }}, {{ provider.address }}</span>
+              <span>{{ provider.city }}, {{ provider.address }}, </span>
+              <span class="rating-value" style="font-weight: bold; color: black">Tel : {{ provider.tel }}</span>
             </button>
 
             <p class="description">{{ provider.desc }}</p>
@@ -84,10 +85,10 @@
             </div>
 
             <!-- Bouton action -->
-            <button class="btn-details" (click)="viewDetails(provider.id)">
+            <!-- <button class="btn-details" (click)="viewDetails(provider.id)">
               Voir les détails
               <span class="arrow">→</span>
-            </button>
+            </button> -->
           </div>
         </div>
       }
