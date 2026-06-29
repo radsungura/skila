@@ -34,21 +34,40 @@
   </div>
 
   <!-- LISTE DES PRESTATAIRES -->
-  @if (filteredProviders().length > 0) {
+   @if(isLoading){
+    <div class="loading-spinner">
+        <img src="images/load1.gif" alt="loading">
+    </div>
+  } 
+  @else if(nodata) {
+    <!-- État vide -->
+    <div class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <h3>Aucun prestataire trouvé</h3>
+      <p>Aucun résultat ne correspond à "{{ searchTerm() }}" dans la catégorie "{{ selectedCategory() }}"</p>
+      <button class="reset-btn" (click)="resetFilters()">Réinitialiser les filtres</button>
+    </div>
+  } 
+  @else if (filteredProviders().length > 0 && !isLoading && !nodata) {
     <div class="providers-list new">
       @for (provider of filteredProviders(); track provider.id) {
         <div class="provider-card">
-          @if (imgLoading) {
-            <div class="image-skeleton">
-              <div class="skeleton-shimmer"></div>
-            </div>
-            <img hidden [src]="'images/' + provider.image" (load)="onLoad()" (error)="onError(provider.image)" alt="service">
-          } @else if (imgerror) {
-            <img [src]="'images/' + provider.image"  (load)="onLoad()" alt="service">
-          }
-          @else {
-            <img  [src]="'images/' + provider.image" (load)="onLoad()" alt="service">
-          }
+          @if (provider.image && !provider.imgerror) {
+              @if (provider.imgLoading) {
+                <div class="image-skeleton">
+                  <div class="skeleton-shimmer"></div>
+                </div>
+              }
+
+              <img
+                [hidden]="provider.imgLoading"
+                [src]="'images/' + provider.image"
+                (load)="onLoad(provider)"
+                (error)="onError(provider)"
+                alt="service"
+              />
+
+            }
           <!-- Badge catégorie -->
           <div class="category-badge" [attr.data-category]="provider.services">
             {{ provider.services }}
@@ -82,8 +101,12 @@
 
             <!-- Prix -->
             <div class="price">
-              <span class="price-label">À partir de </span>
-              <span class="price-value"> <strong>{{ formatPrice(provider.price) }} FBU</strong></span>
+              @if (provider.price) {
+                <span class="price-label">À partir de </span>
+                <span class="price-value"> <strong>{{ formatPrice(provider.price) }} FBU</strong></span>
+              } @else {
+                <span class="price-value"> <strong>Prix non disponible</strong></span>
+              }
             </div>
 
             <!-- Bouton action -->
@@ -95,22 +118,5 @@
         </div>
       }
     </div>
-  }  @if(isLoading){
-    <div class="loading-spinner">
-        <img src="http://localhost:4200/load1.gif" alt="loading">
-    </div>
-  } 
-  @else if(filteredProviders().length === 0) {
-    <!-- État vide -->
-    <!-- <div class="empty-state">
-      <div class="empty-icon">🔍</div>
-      <h3>Aucun prestataire trouvé</h3>
-      <p>Aucun résultat ne correspond à "{{ searchTerm() }}" dans la catégorie "{{ selectedCategory() }}"</p>
-      <button class="reset-btn" (click)="resetFilters()">Réinitialiser les filtres</button>
-    </div> -->
-
-    <div class="loading-spinner">
-        <img src="http://localhost:4200/load1.gif" alt="loading">
-    </div>
-  } 
+  }  
 </div>

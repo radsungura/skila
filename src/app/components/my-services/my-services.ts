@@ -35,8 +35,8 @@ export class MyServices {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
@@ -69,6 +69,7 @@ export class MyServices {
       }
     });
   }
+
   edit(element: any) {
     // Logique pour modifier un service existant
     // alert('Modifier un service');
@@ -84,6 +85,7 @@ export class MyServices {
       }
     });
   }
+
   delete(element: any) {
     // Logique pour supprimer un service
     const dialogRef = this.dialog.open(Delete, {
@@ -101,7 +103,9 @@ export class MyServices {
 
   loadServices() {
     this.prov.getAll().subscribe((data: any) => {
-      this.services = data.reverse();
+      console.log("data", data, data.data.services);
+      
+      this.services = data? data.data.services.reverse(): [];
       this.dataSource = new MatTableDataSource(this.services); // Initialiser la dataSource pour le tableau
       // this.isLoading = false; // Désactiver le chargement une fois les données chargées
   });

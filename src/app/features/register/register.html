@@ -1,0 +1,147 @@
+<!-- features/register/register.component.html -->
+<div class="register-container">
+  <div class="register-card">
+    <div class="register-header">
+      <!-- <div class="logo">🎪</div> -->
+      <h1>Créer un compte</h1>
+      <p>Rejoignez Event Market</p>
+    </div>
+
+    @if (error() != null && !isLoading()) {
+      <div class="alert alert-error">
+        <span class="alert-icon">⚠️</span>
+        <span>{{ error() }}</span>
+        <button class="alert-close" (click)="error.set(null)">✕</button>
+      </div>
+    }
+
+    <form (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-group">
+        <label for="name">Nom complet *</label>
+        <div class="input-group">
+          <span class="input-icon">👤</span>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="name"
+            name="name"
+            placeholder="Jean Dupont"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <div class="input-group">
+          <span class="input-icon">📧</span>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="exemple@email.com"
+            required
+            [class.invalid]="email() && !isValidEmail(email())"
+          />
+        </div>
+        @if (email() && !isValidEmail(email())) {
+          <span class="error-hint">Email invalide</span>
+        }
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Mot de passe *</label>
+          <div class="input-group">
+            <span class="input-icon">🔒</span>
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              id="password"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Minimum 6 caractères"
+              required
+            />
+            <button type="button" class="password-toggle" (click)="toggleShowPassword()">
+              <!-- {{ showPassword() ? '🙈' : '👁️' }} -->
+            </button>
+          </div>
+          @if (password()) {
+            <div class="password-strength">
+              <div class="strength-bar" [style.width]="(getPasswordStrength() / 4) * 100 + '%'" [style.background]="getPasswordStrengthColor()"></div>
+              <span class="strength-text" [style.color]="getPasswordStrengthColor()">{{ getPasswordStrengthText() }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirmer le mot de passe *</label>
+          <div class="input-group">
+            <span class="input-icon">✓</span>
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              id="confirmPassword"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirmez votre mot de passe"
+              required
+            />
+          </div>
+          @if (confirmPassword() && password() !== confirmPassword()) {
+            <span class="error-hint">Les mots de passe ne correspondent pas</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone (optionnel)</label>
+        <div class="input-group">
+          <span class="input-icon">📱</span>
+          <input
+            type="tel"
+            id="phone"
+            [(ngModel)]="phone"
+            name="phone"
+            placeholder="+257 XX XX XX XX"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Je suis *</label>
+        <div class="role-options">
+          @for (option of roleOptions; track option.value) {
+            <label class="role-option" [class.selected]="role() === option.value">
+              <input
+                type="radio"
+                [value]="option.value"
+                [(ngModel)]="role"
+                name="role"
+              />
+              <span class="role-icon">{{ option.icon }}</span>
+              <div class="role-info">
+                <strong>{{ option.label }}</strong>
+                <small>{{ option.description }}</small>
+              </div>
+            </label>
+          }
+        </div>
+      </div>
+
+      <button type="submit" class="btn-register" [disabled]="isLoading() || !isFormValid()">
+        @if (isLoading()) {
+          <span class="spinner"></span>
+          Création en cours...
+        } @else {
+          Créer mon compte
+        }
+      </button>
+
+      <div class="login-link">
+        Déjà un compte ?
+        <a routerLink="/login">Se connecter</a>
+      </div>
+    </form>
+  </div>
+</div>

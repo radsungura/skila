@@ -59,7 +59,8 @@
 
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Description</mat-label>
-        <input [(ngModel)]="data.desc" matInput formControlName="desc" required/>
+        <textarea [(ngModel)]="data.desc" matInput formControlName="desc" maxlength="500" required>
+        </textarea>
       </mat-form-field>
     </div>
       
