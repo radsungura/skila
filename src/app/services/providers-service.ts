@@ -9,8 +9,8 @@ export class ProvidersService {
   allprov: any;
   prov: any;
   providers: any = {};
-  private api = 'http://localhost:3000/providers';
-    //  private api = 'https://skila-api.onrender.com/providers';
+//   private api = 'http://localhost:3000/providers';
+     private api = 'https://skila-api.onrender.com/services';
 
   constructor(private http: HttpClient, public authService: AuthService) {}
 
