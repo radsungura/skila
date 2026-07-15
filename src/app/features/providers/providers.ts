@@ -28,15 +28,34 @@ export interface Provider {
 export class ProvidersComponent {
   providers: any = []; // Liste des prestataires
   isLoading: boolean = true; // Indicateur de chargement
+  imgLoading: boolean = false; // Indicateur de chargement
+  imgerror: boolean = false; // Indicateur d'erreur de chargement d'image
+  nodata: boolean = false; // Indicateur de données vides
 
   constructor(private prov: ProvidersService) { 
     this.isLoading = true; // Activer le chargement
+    this.imgLoading = true; // Activer le chargement
     this.prov.getAll().subscribe(el => {
       if (el.length) {
         this.allProviders.set(el); // Mettre à jour la liste complète des prestataires
+        this.isLoading = false; // Désactiver le chargement une fois les données chargées
+        this.imgLoading = true;
+        this.imgerror = false;  
+      }else{
+        this.nodata = true; // Désactiver le chargement même si aucun prestataire trouvé
       }
     });  
   }
+  onLoad(provider: any) {
+    provider.imgLoading = false;
+  }
+
+  onError(provider: any) {
+    provider.imgLoading = false;
+    provider.imgerror = true;
+  }
+
+  
   // Terme de recherche
   searchTerm = signal<string>('');
   

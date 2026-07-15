@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../services/login-service';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,12 +9,22 @@ export class ProvidersService {
   allprov: any;
   prov: any;
   providers: any = {};
-    //  private api = 'http://localhost:3000/providers';
-     private api = 'https://skila-api.onrender.com/providers';
-  constructor(private http: HttpClient) {}
+//   private api = 'http://localhost:3000/providers';
+     private api = 'https://skila-api.onrender.com/services';
+
+  constructor(private http: HttpClient, public authService: AuthService) {}
 
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.api);
+    // Récupérer le token
+    const token = this.authService.getToken();
+    
+    // Créer les headers avec le token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });    
+    
+    return this.http.get<any[]>(this.api, { headers });
   }
 
   create(doc: any): Observable<any> {
