@@ -32,6 +32,8 @@ export interface Place {
   address: string;
 }
 
+export type UserRole = 'admin' | 'provider' | 'client';
+
 export interface User {
     name: string;
     fullname: string;
@@ -48,4 +50,40 @@ export interface User {
 //   role: 'admin' | 'provider' | 'client';
 //   avatar?: string;
 //   phone?: string;
+//   isActive: boolean;
+//   createdAt: Date;
+//   updatedAt?: Date;
 // }
+
+export interface AuthResponse {
+  data: {
+    user: User,
+    token: string
+  };
+  expiresIn: number;
+  success: boolean;
+  message?: string;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+}
+
+export interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone?: string;
+  role?: 'admin' | 'provider' | 'client';
+}
+
+export interface DecodedToken {
+  userId: string;
+  email: string;
+  role: 'admin' | 'provider' | 'client';
+  exp: number;
+  iat: number;
+}

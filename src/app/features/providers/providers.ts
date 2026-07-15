@@ -28,9 +28,9 @@ export interface Provider {
 export class ProvidersComponent {
   providers: any = []; // Liste des prestataires
   isLoading: boolean = true; // Indicateur de chargement
-  imgLoading: boolean = true; // Indicateur de chargement
+  imgLoading: boolean = false; // Indicateur de chargement
   imgerror: boolean = false; // Indicateur d'erreur de chargement d'image
-  imgeror: string = ''; // Stocke le nom de l'image qui a échoué à charger"";
+  nodata: boolean = false; // Indicateur de données vides
 
   constructor(private prov: ProvidersService) { 
     this.isLoading = true; // Activer le chargement
@@ -39,23 +39,23 @@ export class ProvidersComponent {
       if (el.length) {
         this.allProviders.set(el); // Mettre à jour la liste complète des prestataires
         this.isLoading = false; // Désactiver le chargement une fois les données chargées
+        this.imgLoading = true;
+        this.imgerror = false;  
       }else{
-        this.isLoading = false; // Désactiver le chargement même si aucun prestataire trouvé
+        this.nodata = true; // Désactiver le chargement même si aucun prestataire trouvé
       }
     });  
   }
-  onLoad() {
-    console.log('Image chargée avec succès');
-    this.imgLoading = false; // Désactiver le chargement de l'image
+  onLoad(provider: any) {
+    provider.imgLoading = false;
   }
 
-  onError(item: string) {
-    this.imgerror = true; // Activer l'indicateur d'erreur
-    this.imgeror = item;// Activer l'indicateur d'erreur
-    console.log('Erreur de chargement');
-    return item; // Empêcher l'affichage de l'image cassée
+  onError(provider: any) {
+    provider.imgLoading = false;
+    provider.imgerror = true;
   }
 
+  
   // Terme de recherche
   searchTerm = signal<string>('');
   

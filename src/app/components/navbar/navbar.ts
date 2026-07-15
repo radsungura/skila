@@ -4,6 +4,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Login } from '../../features/login/login';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class Navbar {
   isMenuOpen : boolean = false;
   
-  constructor(public route: Router,) { }
+  constructor(public route: Router, public dialog: MatDialog) { }
 
   toggleMenu(): void {
     console.log("before", this.isMenuOpen);
@@ -39,6 +41,17 @@ export class Navbar {
     console.log('Login clicked');
     // Naviguer vers la page de login
     // this.router.navigate(['/login']);
+        const dialogRef = this.dialog.open(Login, {
+          width: '90vw', // ou '80vw' pour responsive
+          maxHeight: '1000vh',
+          data: { action: 'add' }
+        });
+    
+        dialogRef.afterClosed().subscribe((result: any) => {
+          if (result) {
+            // this.loadServices();
+          }
+        });
   }
 
   onRegister(): void {

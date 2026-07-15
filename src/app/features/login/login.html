@@ -1,1 +1,96 @@
-<p>login works!</p>
+<!-- features/login/login.component.html -->
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <!-- <div class="logo">🎪</div> -->
+      <h1>Event Market</h1>
+      <p>Connectez-vous à votre compte</p>
+    </div>
+
+    @if (error()) {
+      <div class="alert alert-error">
+        <span class="alert-icon">⚠️</span>
+        <span>{{ error() }}</span>
+        <button class="alert-close" (click)="error.set(null)">✕</button>
+      </div>
+    }
+
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <span class="input-icon">📧</span>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="exemple@email.com"
+            required
+            [class.invalid]="email() && !isValidEmail(email())"
+          />
+        </div>
+        @if (email() && !isValidEmail(email())) {
+          <span class="error-hint">Email invalide</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <div class="input-group">
+          <span class="input-icon">🔒</span>
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Votre mot de passe"
+            required
+          />
+          <button type="button" class="password-toggle" (click)="toggleShowPassword()">
+            <!-- {{ showPassword() ? }} -->
+            <!-- {{ showPassword() ? '🙈' : '👁️' }} -->
+          </button>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
+          <span>Se souvenir de moi</span>
+        </label>
+        <a routerLink="/forgot-password" class="forgot-link">Mot de passe oublié ?</a>
+      </div>
+
+      <button type="submit" class="btn-login" [disabled]="isLoading() || !isFormValid()">
+        @if (isLoading()) {
+          <span class="spinner"></span>
+          Connexion en cours...
+        } @else {
+          Se connecter
+        }
+      </button>
+
+      <div class="register-link">
+        Pas encore de compte ?
+        <a routerLink="/register">Créer un compte</a>
+      </div>
+    </form>
+
+    <!-- Démo rapide pour tester -->
+    <!-- <div class="demo-accounts">
+      <p>Comptes de démo :</p>
+      <div class="demo-buttons">
+        <button (click)="email.set('admin@eventmarket.com'); password.set('admin123')">
+          👑 Admin
+        </button>
+        <button (click)="email.set('provider@eventmarket.com'); password.set('provider123')">
+          🎪 Prestataire
+        </button>
+        <button (click)="email.set('client@eventmarket.com'); password.set('client123')">
+          👤 Client
+        </button>
+      </div>
+    </div> -->
+  </div>
+</div>
